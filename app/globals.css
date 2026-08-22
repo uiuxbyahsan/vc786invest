@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --section-padding-y: 140px;
+  --container-max: 1280px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Offset anchor jumps so section eyebrows clear the floating nav */
+section[id],
+footer[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Static fallback for the WebGL hero (reduced-motion or no WebGL) */
+.hero-fallback-bg {
+  background: linear-gradient(135deg, #c7efda, #7fe0b4, #3fa87a);
+  background-size: 100% 100%;
+}
+
+/* Seamless university-logo marquee (two copies, translate -50%) */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee-scroll 36s linear infinite;
+  width: max-content;
+}
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+body {
+  background-color: #faf7f0;
+  color: #14231d;
+}
+
+/* Consistent focus ring for keyboard users */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #3fa87a;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .container-786 {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .container-786 {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+  }
+
+  .section-pad {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  @media (min-width: 640px) {
+    .section-pad {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-top: 140px;
+      padding-bottom: 140px;
+    }
+  }
+
+  /* Pill buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1;
+    padding: 14px 24px;
+    transition: transform 0.18s ease, background-color 0.2s ease,
+      color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    transform: scale(1.02);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  /* Trailing arrow nudges right on hover */
+  .btn svg {
+    transition: transform 0.18s ease;
+  }
+  .btn:hover svg {
+    transform: translateX(3px);
+  }
+  .btn-dark {
+    background-color: #14231d;
+    color: #faf7f0;
+  }
+  .btn-dark:hover {
+    background-color: #24382e;
+  }
+  .btn-mint {
+    background-color: #7fe0b4;
+    color: #14231d;
+  }
+  .btn-mint:hover {
+    background-color: #3fa87a;
+    color: #ffffff;
+  }
+  .btn-white {
+    background-color: #ffffff;
+    color: #14231d;
+  }
+  .btn-white:hover {
+    background-color: #eaf8f0; /* mint tint */
+  }
+  .btn-outline {
+    background-color: transparent;
+    color: #14231d;
+    border: 1px solid #ddd8cc;
+  }
+  .btn-outline:hover {
+    background-color: rgba(127, 224, 180, 0.12);
+    border-color: #3fa87a;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5b6b62;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
