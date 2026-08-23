@@ -13,11 +13,11 @@ export default function ImpactStats() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[45fr_55fr] lg:gap-16">
           {/* Left — graduate pill collage */}
           <PillCollage
-            src="/assets/banner4.png"
-            alt="A scholarship recipient at graduation"
-            width={369}
-            height={348}
-            className="mx-auto max-w-sm lg:max-w-none"
+            src="/assets/schloshop.png"
+            alt="Scholarship recipients at graduation"
+            width={1536}
+            height={1024}
+            className="mx-auto max-w-md lg:max-w-none"
           />
 
           {/* Right — single merged stat block */}

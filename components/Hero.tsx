@@ -6,17 +6,19 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { fadeUpLoad } from "../lib/motion";
 
-// WebGL is client-only — render the static fallback gradient until it mounts.
+// WebGL is client-only. While it loads, the section's light CSS gradient
+// (.hero-bg-container) shows through — no placeholder needed.
 const HeroShaderBackground = dynamic(() => import("./HeroShaderBackground"), {
   ssr: false,
-  loading: () => (
-    <div className="hero-fallback-bg absolute inset-0" aria-hidden />
-  ),
+  loading: () => null,
 });
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden" id="top">
+    <section
+      className="hero-bg-container relative overflow-hidden"
+      id="top"
+    >
       {/* WebGL fluid gradient (falls back to a static CSS gradient) */}
       <HeroShaderBackground />
 

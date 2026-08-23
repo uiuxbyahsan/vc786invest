@@ -33,18 +33,24 @@ export default function HeroShaderBackground() {
         const renderer = new Renderer({
           canvas,
           dpr: Math.min(window.devicePixelRatio, 2),
-          alpha: false,
+          // Transparent canvas: before the first frame paints, the light CSS
+          // gradient on the parent shows through — never an opaque black frame.
+          alpha: true,
           antialias: false,
           depth: false,
         });
+        renderer.gl.clearColor(0, 0, 0, 0);
         const gl = renderer.gl;
         const parent = canvas.parentElement as HTMLElement;
 
+        // Start mid-cycle so the very first frame lands in a light part of
+        // the animation (never a dark starting point).
+        const TIME_OFFSET = 5.0;
         const program = new Program(gl, {
           vertex: vertexShader,
           fragment: fragmentShader,
           uniforms: {
-            uTime: { value: 0 },
+            uTime: { value: TIME_OFFSET },
             uResolution: { value: [1, 1] },
           },
         });
@@ -62,6 +68,14 @@ export default function HeroShaderBackground() {
         resize();
         window.addEventListener("resize", resize);
 
+        // Render one frame synchronously so there's no black backbuffer flash
+        // before the first requestAnimationFrame tick.
+        try {
+          renderer.render({ scene: mesh });
+        } catch {
+          /* ignore */
+        }
+
         let visible = true;
         let raf = 0;
         const start = performance.now();
@@ -70,7 +84,7 @@ export default function HeroShaderBackground() {
             raf = 0;
             return;
           }
-          program.uniforms.uTime.value = (now - start) * 0.001;
+          program.uniforms.uTime.value = TIME_OFFSET + (now - start) * 0.001;
           try {
             renderer.render({ scene: mesh });
           } catch {
@@ -114,7 +128,8 @@ export default function HeroShaderBackground() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="absolute inset-0 h-full w-full"
+      className="absolute inset-0 h-full w-full opacity-100"
+      style={{ background: "transparent" }}
     />
   );
 }

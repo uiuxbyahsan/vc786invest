@@ -4,9 +4,12 @@
 export const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.3 },
+  viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.6, ease: "easeOut" },
 } as const;
+
+// Alias — same preset under the spec's requested name.
+export const fadeInUp = fadeUp;
 
 export const staggerContainer = (staggerMs: number = 80) => ({
   whileInView: {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Linkedin } from "lucide-react";
+import Reveal from "./Reveal";
 
 const COLUMNS = [
   {
@@ -16,7 +17,7 @@ const COLUMNS = [
     title: "For Donors",
     links: [
       { label: "Donate", href: "#products" },
-      { label: "Impact", href: "#why" },
+      { label: "Impact", href: "#impact" },
     ],
   },
   {
@@ -32,7 +33,7 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer id="footer" className="bg-charcoal pb-10 pt-20 text-white">
-      <div className="container-786">
+      <Reveal className="container-786">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr]">
           {/* Left */}
           <div>
@@ -89,7 +90,7 @@ export default function Footer() {
             <Linkedin size={18} />
           </a>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

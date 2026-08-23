@@ -53,10 +53,10 @@ export default function Approach() {
           {/* Right (image) */}
           <div className="order-1 lg:order-2">
             <PillCollage
-              src="/assets/hero-img2.png"
+              src="/assets/startvcinvester.png"
               alt="The 786 team collaborating with founders"
-              width={579}
-              height={456}
+              width={1536}
+              height={1024}
               className="mx-auto max-w-md lg:max-w-none"
             />
           </div>

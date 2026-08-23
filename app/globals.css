@@ -19,6 +19,13 @@ footer[id] {
   scroll-margin-top: 96px;
 }
 
+/* Static light gradient painted from the stylesheet — instant, before any JS.
+   Guarantees the hero is light from the first painted pixel; the WebGL canvas
+   (transparent until its first frame) sits on top and hands off invisibly. */
+.hero-bg-container {
+  background: linear-gradient(135deg, #c7efda, #7fe0b4);
+}
+
 /* Static fallback for the WebGL hero (reduced-motion or no WebGL) */
 .hero-fallback-bg {
   background: linear-gradient(135deg, #c7efda, #7fe0b4, #3fa87a);
