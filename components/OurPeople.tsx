@@ -143,7 +143,7 @@ export default function OurPeople() {
 
                 {/* Company name */}
                 <h3
-                  className={`mt-6 font-sans text-3xl font-bold tracking-tight sm:text-4xl ${
+                  className={`mt-6 font-sans text-3xl font-medium tracking-tight sm:text-4xl ${
                     person.dark ? "text-white" : "text-[#14231D]"
                   }`}
                 >

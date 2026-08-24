@@ -84,7 +84,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 function ReviewCard({ item }: { item: Testimonial }) {
   return (
-    <div className="flex h-[400px] w-[320px] shrink-0 flex-col justify-between rounded-2xl bg-white p-6 shadow-[0_12px_34px_-16px_rgba(20,35,29,0.22)] sm:w-[400px] sm:p-7">
+    <div className="flex h-[400px] w-[320px] shrink-0 flex-col justify-between rounded-2xl bg-white p-6 sm:w-[400px] sm:p-7">
       {/* Top: profile + company logo */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -139,7 +139,7 @@ function ReviewCard({ item }: { item: Testimonial }) {
 
 function PhotoCard({ item }: { item: Testimonial }) {
   return (
-    <div className="relative flex h-[400px] w-[320px] shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-forest p-6 shadow-sm sm:w-[400px] sm:p-7">
+    <div className="relative flex h-[400px] w-[320px] shrink-0 flex-col justify-between overflow-hidden rounded-2xl bg-forest p-6 sm:w-[400px] sm:p-7">
       <Image
         src={item.image!}
         alt={item.name}
