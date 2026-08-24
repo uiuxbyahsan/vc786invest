@@ -134,14 +134,6 @@ input:focus-visible,
   .btn-forest:hover {
     background-color: #24382e;
   }
-  /* Bright lime accent button */
-  .btn-lime {
-    background-color: #d4ff4f;
-    color: #14231d;
-  }
-  .btn-lime:hover {
-    background-color: #c4f22f;
-  }
   /* White button (on dark/video grounds) */
   .btn-white {
     background-color: #ffffff;
