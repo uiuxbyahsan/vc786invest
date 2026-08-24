@@ -1,15 +1,17 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import ScholarshipSchools from "../components/ScholarshipSchools";
-import PortfolioGrid from "../components/PortfolioGrid";
-import CoInvestors from "../components/CoInvestors";
+import AboutStats from "../components/AboutStats";
 import MissionSplit from "../components/MissionSplit";
-import ImpactStats from "../components/ImpactStats";
+import CompanyVision from "../components/CompanyVision";
 import Approach from "../components/Approach";
+import ScholarshipSchools from "../components/ScholarshipSchools";
+import Portfolio from "../components/Portfolio";
 import ProcessSteps from "../components/ProcessSteps";
-import FoundersGrid from "../components/FoundersGrid";
-import ProductsComparison from "../components/ProductsComparison";
+import OurPeople from "../components/OurPeople";
+import Testimonials from "../components/Testimonials";
+import OurSolutions from "../components/OurSolutions";
 import FAQAccordion from "../components/FAQAccordion";
+import BlogSection from "../components/BlogSection";
 import ClosingCTA from "../components/ClosingCTA";
 import Footer from "../components/Footer";
 
@@ -18,16 +20,18 @@ export default function Home() {
     <main className="overflow-x-hidden">
       <Navbar />
       <Hero />
-      <ScholarshipSchools />
-      <PortfolioGrid />
-      <CoInvestors />
+      <AboutStats />
       <MissionSplit />
-      <ImpactStats />
+      <CompanyVision />
       <Approach />
+      <ScholarshipSchools />
+      <Portfolio />
       <ProcessSteps />
-      <FoundersGrid />
-      <ProductsComparison />
+      <OurPeople />
+      <Testimonials />
+      <OurSolutions />
       <FAQAccordion />
+      <BlogSection />
       <ClosingCTA />
       <Footer />
     </main>

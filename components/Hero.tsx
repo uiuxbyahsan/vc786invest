@@ -1,73 +1,79 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { fadeUpLoad } from "../lib/motion";
 
-// WebGL is client-only. While it loads, the section's light CSS gradient
-// (.hero-bg-container) shows through — no placeholder needed.
-const HeroShaderBackground = dynamic(() => import("./HeroShaderBackground"), {
-  ssr: false,
-  loading: () => null,
-});
+const VIDEO_SRC =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260815_030633_ddbe5946-3728-4dc9-ad0a-2e81e5682c69.mp4";
 
 export default function Hero() {
+  const reduce = useReducedMotion();
+
   return (
     <section
-      className="hero-bg-container relative overflow-hidden"
       id="top"
+      className="relative flex min-h-[88vh] sm:min-h-[92vh] items-start justify-center overflow-hidden bg-[#D8EFE0] text-center"
     >
-      {/* WebGL fluid gradient (falls back to a static CSS gradient) */}
-      <HeroShaderBackground />
+      {/* Video background */}
+      <video
+        autoPlay={!reduce}
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src={VIDEO_SRC} type="video/mp4" />
+      </video>
 
-      {/* Subtle avif texture overlay */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-30 mix-blend-soft-light"
-        style={{
-          backgroundImage: "url('/assets/hero-texture.avif')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      {/* Readability veil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream/30" />
-
-      {/* Content — centered max-width container */}
-      <div className="container-786 relative z-10 flex flex-col items-center px-6 pb-24 pt-40 text-center sm:pb-32 sm:pt-44 lg:pb-40">
+      {/* Hero content positioned in upper area matching exact reference */}
+      <div className="container-786 relative z-10 mx-auto w-full max-w-4xl pt-24 sm:pt-28 lg:pt-32 pb-20 flex flex-col items-center justify-center text-center">
         <motion.h1
           {...fadeUpLoad}
           transition={{ ...fadeUpLoad.transition, duration: 0.7 }}
-          className="max-w-[16ch] font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-[68px]"
+          className="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-[76px] font-medium leading-[1.08] sm:leading-[1.08] tracking-[-0.02em] text-[#14231D]"
         >
-          Invest in startups. Fund the next generation of{" "}
-          <span className="font-playfair text-[1.06em] italic font-normal text-mint-dark">
-            pioneers
+          Invest in startups.
+          <br />
+          Fund the next
+          <br />
+          generation of{" "}
+          <span className="font-playfair-italic font-normal text-[#32A563]">
+            pioneers.
           </span>
-          .
         </motion.h1>
 
         <motion.p
           {...fadeUpLoad}
           transition={{ ...fadeUpLoad.transition, duration: 0.7, delay: 0.1 }}
-          className="mt-6 max-w-[560px] text-lg leading-relaxed text-ink-muted"
+          className="mt-6 max-w-2xl text-base sm:text-lg lg:text-[20px] leading-relaxed text-[#14231D]/80 font-sans font-normal"
         >
-          786 Ventures backs exceptional founders. The returns fund STEM
-          scholarships for minority and women engineering students.
+          786 Ventures backs exceptional founders. The returns fund
+          <br className="hidden sm:inline" /> STEM scholarships for minority and
+          women engineering students.
         </motion.p>
 
         <motion.div
           {...fadeUpLoad}
           transition={{ ...fadeUpLoad.transition, duration: 0.7, delay: 0.2 }}
-          className="mt-9 flex flex-col items-center gap-4 sm:flex-row"
+          className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <Link href="#portfolio" className="btn btn-white">
+          <Link
+            href="#portfolio"
+            className="inline-flex items-center justify-center rounded-full bg-white text-[#14231D] font-medium text-base px-8 py-3.5 shadow-sm hover:bg-white/90 transition-all"
+          >
             See Portfolio
           </Link>
-          <Link href="#products" className="btn btn-dark">
-            Invest Now <ArrowRight size={16} />
+          <Link
+            href="#solutions"
+            className="btn-arrow group text-base shadow-sm"
+          >
+            Invest Now
+            <span className="btn-arrow__badge">
+              <ArrowUpRight size={18} strokeWidth={2.2} />
+            </span>
           </Link>
         </motion.div>
       </div>

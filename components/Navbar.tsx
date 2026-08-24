@@ -4,35 +4,49 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
+// Simple inline nav (VentCapital pattern): logo left, links center, dark
+// rounded CTA right. No full-screen overlay — mobile collapses to a plain
+// dropdown panel.
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Portfolio", href: "#portfolio" },
-  { label: "How It Works", href: "#how" },
+  { label: "How It Works", href: "#solutions" },
   { label: "Founders", href: "#founders" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#footer" },
 ];
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
     };
-  }, [mobileOpen]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
-    <>
-      {/* Thin mint accent line at very top */}
-      <div className="fixed inset-x-0 top-0 z-[60] h-[3px] bg-mint" />
-
-      <div className="fixed inset-x-0 top-4 z-50 px-4">
-        <nav className="container-786 !px-0">
-          <div className="flex items-center justify-between gap-4 rounded-card border border-hairline/60 bg-cream px-4 py-3 transition-colors duration-200 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-[80]">
+      <div
+        className={`transition-colors duration-300 ${
+          scrolled || open
+            ? "border-b border-hairline/70 bg-white/90 backdrop-blur"
+            : "border-b border-transparent"
+        }`}
+      >
+        <nav className="container-786">
+          <div className="flex h-[68px] items-center justify-between gap-4">
             {/* Left: logo */}
             <Link
               href="#top"
@@ -49,94 +63,94 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Center: flat anchor links (desktop) */}
-            <div className="hidden items-center gap-1 lg:flex">
+            {/* Center: page links */}
+            <ul className="hidden items-center gap-8 md:flex">
               {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="rounded-pill px-3 py-2 text-sm font-medium text-ink transition-colors duration-150 hover:text-mint-dark"
-                >
-                  {link.label}
-                </Link>
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-[15px] font-medium text-ink/80 transition-colors hover:text-ink"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            {/* Right: single CTA (desktop) */}
-            <div className="hidden items-center gap-2 lg:flex">
-              <Link href="#products" className="btn btn-dark">
-                Invest Now <ArrowRight size={16} />
+            {/* Right: CTA + mobile toggle */}
+            <div className="flex items-center gap-2">
+              <Link
+                href="#solutions"
+                className="btn-arrow btn-arrow--sm group hidden sm:inline-flex"
+              >
+                Invest Now
+                <span className="btn-arrow__badge">
+                  <ArrowUpRight size={16} strokeWidth={2.2} />
+                </span>
               </Link>
-            </div>
 
-            {/* Mobile: hamburger */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-pill text-ink lg:hidden"
-              aria-label="Open menu"
-            >
-              <Menu size={22} />
-            </button>
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                aria-expanded={open}
+                aria-label={open ? "Close menu" : "Open menu"}
+                className="flex h-10 w-10 items-center justify-center rounded-full text-ink md:hidden"
+              >
+                <span className="relative block h-4 w-5" aria-hidden>
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${
+                      open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-[3px]"
+                    }`}
+                  />
+                  <span
+                    className={`absolute left-0 block h-[2px] w-5 rounded-full bg-current transition-all duration-300 ${
+                      open
+                        ? "top-1/2 -translate-y-1/2 -rotate-45"
+                        : "bottom-[3px]"
+                    }`}
+                  />
+                </span>
+              </button>
+            </div>
           </div>
         </nav>
       </div>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile dropdown panel */}
       <AnimatePresence>
-        {mobileOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[70] bg-cream lg:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="border-b border-hairline/70 bg-white md:hidden"
           >
-            <div className="flex h-full flex-col p-6">
-              <div className="flex items-center justify-between">
-                <Image
-                  src="/assets/logo.svg"
-                  alt="786 Ventures"
-                  width={110}
-                  height={34}
-                  className="h-7 w-auto"
-                />
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex h-10 w-10 items-center justify-center rounded-pill text-ink"
-                  aria-label="Close menu"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              <div className="mt-10 flex flex-1 flex-col gap-2">
-                {NAV_LINKS.map((link) => (
+            <ul className="container-786 flex flex-col gap-1 py-4">
+              {NAV_LINKS.map((link) => (
+                <li key={link.label}>
                   <Link
-                    key={link.label}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="py-2 font-display text-3xl text-ink"
+                    onClick={() => setOpen(false)}
+                    className="block rounded-lg px-2 py-3 text-lg font-medium text-ink hover:bg-mint-pale"
                   >
                     {link.label}
                   </Link>
-                ))}
-              </div>
-
-              <div className="pt-6">
+                </li>
+              ))}
+              <li className="mt-2">
                 <Link
-                  href="#products"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn btn-dark w-full justify-center"
+                  href="#solutions"
+                  onClick={() => setOpen(false)}
+                  className="btn btn-forest w-full"
                 >
-                  Invest Now <ArrowRight size={16} />
+                  Invest Now
                 </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }

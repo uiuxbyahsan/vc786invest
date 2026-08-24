@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --section-padding-y: 140px;
   --container-max: 1280px;
+}
+
+.font-playfair-italic {
+  font-family: var(--font-playfair), "Playfair Display", Georgia, serif !important;
+  font-style: italic !important;
 }
 
 html {
@@ -19,20 +25,12 @@ footer[id] {
   scroll-margin-top: 96px;
 }
 
-/* Static light gradient painted from the stylesheet — instant, before any JS.
-   Guarantees the hero is light from the first painted pixel; the WebGL canvas
-   (transparent until its first frame) sits on top and hands off invisibly. */
-.hero-bg-container {
-  background: linear-gradient(135deg, #c7efda, #7fe0b4);
+body {
+  background-color: #ffffff;
+  color: #14231d;
 }
 
-/* Static fallback for the WebGL hero (reduced-motion or no WebGL) */
-.hero-fallback-bg {
-  background: linear-gradient(135deg, #c7efda, #7fe0b4, #3fa87a);
-  background-size: 100% 100%;
-}
-
-/* Seamless university-logo marquee (two copies, translate -50%) */
+/* Seamless logo/university marquee (two copies, translate -50%) */
 @keyframes marquee-scroll {
   from {
     transform: translateX(0);
@@ -54,16 +52,12 @@ footer[id] {
   }
 }
 
-body {
-  background-color: #faf7f0;
-  color: #14231d;
-}
-
 /* Consistent focus ring for keyboard users */
 a:focus-visible,
 button:focus-visible,
+input:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #3fa87a;
+  outline: 2px solid #14231d;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -99,68 +93,102 @@ button:focus-visible,
 
   @media (min-width: 1024px) {
     .section-pad {
-      padding-top: 140px;
-      padding-bottom: 140px;
+      padding-top: 130px;
+      padding-bottom: 130px;
     }
   }
 
-  /* Pill buttons */
+  /* Buttons — modern rounded pill with enhanced height */
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    border-radius: 999px;
-    font-weight: 500;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 9999px;
+    font-weight: 600;
     font-size: 15px;
     line-height: 1;
-    padding: 14px 24px;
+    min-height: 52px;
+    padding: 16px 32px;
     transition: transform 0.18s ease, background-color 0.2s ease,
-      color 0.2s ease, border-color 0.2s ease;
+      color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     white-space: nowrap;
   }
   .btn:hover {
-    transform: scale(1.02);
+    transform: translateY(-1px);
   }
   .btn:active {
-    transform: scale(0.98);
+    transform: translateY(0);
   }
-  /* Trailing arrow nudges right on hover */
   .btn svg {
     transition: transform 0.18s ease;
   }
   .btn:hover svg {
     transform: translateX(3px);
   }
-  .btn-dark {
+  /* Dark forest button (nav CTA) */
+  .btn-forest {
     background-color: #14231d;
-    color: #faf7f0;
-  }
-  .btn-dark:hover {
-    background-color: #24382e;
-  }
-  .btn-mint {
-    background-color: #7fe0b4;
-    color: #14231d;
-  }
-  .btn-mint:hover {
-    background-color: #3fa87a;
     color: #ffffff;
   }
+  .btn-forest:hover {
+    background-color: #24382e;
+  }
+  /* Bright lime accent button */
+  .btn-lime {
+    background-color: #d4ff4f;
+    color: #14231d;
+  }
+  .btn-lime:hover {
+    background-color: #c4f22f;
+  }
+  /* White button (on dark/video grounds) */
   .btn-white {
     background-color: #ffffff;
     color: #14231d;
   }
   .btn-white:hover {
-    background-color: #eaf8f0; /* mint tint */
+    background-color: #eaf7ec;
   }
+  /* Outline button on light grounds */
   .btn-outline {
     background-color: transparent;
     color: #14231d;
     border: 1px solid #ddd8cc;
   }
   .btn-outline:hover {
-    background-color: rgba(127, 224, 180, 0.12);
-    border-color: #3fa87a;
+    background-color: rgba(20, 35, 29, 0.04);
+    border-color: #14231d;
+  }
+  /* Outline button on dark/video grounds */
+  .btn-outline-light {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+  }
+
+  /* Premium hover lift for cards */
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px -18px rgba(20, 35, 29, 0.28);
+  }
+
+  /* Image reveal zoom — wrap image, add this on the <img> */
+  .img-zoom {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .group:hover .img-zoom {
+    transform: scale(1.05);
   }
 
   .eyebrow {
@@ -169,9 +197,60 @@ button:focus-visible,
     gap: 8px;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #5b6b62;
+  }
+  .eyebrow-dot::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: #32a563;
+  }
+
+  /* Pill CTA with circular arrow badge (nav + hero) */
+  .btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 9999px;
+    background-color: #14231d;
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    padding: 6px 6px 6px 22px;
+    font-size: 15px;
+    transition: background-color 0.2s ease;
+  }
+  .btn-arrow:hover {
+    background-color: #24382e;
+  }
+  .btn-arrow__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    width: 34px;
+    border-radius: 9999px;
+    background-color: #32a563;
+    color: #ffffff;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  .btn-arrow:hover .btn-arrow__badge {
+    background-color: #3bbd72;
+    transform: rotate(45deg);
+  }
+  /* Compact variant for the navbar */
+  .btn-arrow--sm {
+    padding: 4px 4px 4px 18px;
+    font-size: 14px;
+  }
+  .btn-arrow--sm .btn-arrow__badge {
+    height: 30px;
+    width: 30px;
   }
 }
 

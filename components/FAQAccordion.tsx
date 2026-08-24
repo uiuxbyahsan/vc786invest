@@ -42,14 +42,14 @@ export default function FAQAccordion() {
           {/* Left — sticky heading */}
           <Reveal>
             <div className="lg:sticky lg:top-28">
-              <span className="eyebrow">FAQ</span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-[40px]">
+              <span className="eyebrow eyebrow-dot">FAQ</span>
+              <h2 className="mt-4 font-sans text-4xl font-medium leading-[1.08] tracking-[-0.02em] text-ink sm:text-5xl lg:text-[54px]">
                 Frequently
                 <br />
                 asked
                 <br />
-                <span className="font-playfair text-[1.06em] italic font-normal text-mint-dark">
-                  questions
+                <span className="font-playfair-italic font-normal text-[#32A563]">
+                  questions.
                 </span>
               </h2>
             </div>

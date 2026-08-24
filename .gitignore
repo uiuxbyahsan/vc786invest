@@ -7,3 +7,7 @@
 .env*
 .vercel
 next-env.d.ts
+
+# Local design reference material (not part of the app)
+/New website new section
+/Playfair_Display

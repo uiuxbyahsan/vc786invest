@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { formula, inter, playfairItalic } from "../lib/fonts";
+import { inter, playfairDisplay } from "../lib/fonts";
 import Providers from "../components/Providers";
 import "./globals.css";
 
@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${formula.variable} ${inter.variable} ${playfairItalic.variable}`}
+      className={`${inter.variable} ${playfairDisplay.variable}`}
     >
-      <body className="font-body bg-cream text-ink antialiased">
+      <body className="bg-background font-sans text-ink antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>
