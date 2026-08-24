@@ -66,7 +66,7 @@ export default function BlogSection() {
                 <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5B6B62]">
                   {article.category}
                 </span>
-                <h3 className="mt-2.5 font-sans text-xl sm:text-2xl font-bold leading-snug tracking-tight text-[#14231D] group-hover:text-[#32A563] transition-colors">
+                <h3 className="mt-2.5 font-sans text-xl sm:text-2xl font-medium leading-snug tracking-tight text-[#14231D] group-hover:text-[#32A563] transition-colors">
                   {article.title}
                 </h3>
                 <p className="mt-4 text-xs sm:text-sm font-medium text-[#5B6B62]">
