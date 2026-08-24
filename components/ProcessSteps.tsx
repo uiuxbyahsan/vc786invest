@@ -25,7 +25,7 @@ const STEPS = [
 
 export default function ProcessSteps() {
   return (
-    <section id="how-it-works" className="section-pad bg-[#FAF8F5]">
+    <section id="how-it-works" className="section-pad bg-[#F8F9FA]">
       <div className="container-786">
         <Reveal className="max-w-3xl">
           <span className="eyebrow eyebrow-dot">HOW 786 WORKS</span>

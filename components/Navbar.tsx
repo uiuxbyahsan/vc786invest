@@ -81,11 +81,11 @@ export default function Navbar() {
             <div className="flex items-center gap-2">
               <Link
                 href="#solutions"
-                className="btn-arrow btn-arrow--sm group hidden sm:inline-flex"
+                className="btn-arrow group hidden h-[52px] sm:inline-flex"
               >
                 Invest Now
                 <span className="btn-arrow__badge">
-                  <ArrowUpRight size={16} strokeWidth={2.2} />
+                  <ArrowUpRight size={18} strokeWidth={2.2} />
                 </span>
               </Link>
 
