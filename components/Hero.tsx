@@ -62,13 +62,13 @@ export default function Hero() {
         >
           <Link
             href="#portfolio"
-            className="inline-flex items-center justify-center rounded-full bg-white text-[#14231D] font-medium text-base px-8 py-3.5 shadow-sm hover:bg-white/90 transition-all"
+            className="inline-flex h-[52px] items-center justify-center rounded-full bg-white text-[#14231D] font-medium text-base px-8 shadow-sm hover:bg-white/90 transition-all"
           >
             See Portfolio
           </Link>
           <Link
             href="#solutions"
-            className="btn-arrow group text-base shadow-sm"
+            className="btn-arrow group h-[52px] text-base shadow-sm"
           >
             Invest Now
             <span className="btn-arrow__badge">
