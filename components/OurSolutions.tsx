@@ -85,7 +85,7 @@ export default function OurSolutions() {
               <div>
                 {/* 1. Header Block */}
                 <div>
-                  <h3 className="font-sans text-2xl sm:text-3xl font-medium tracking-tight text-[#14231D]">
+                  <h3 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-[#14231D]">
                     {card.title}
                   </h3>
                   <p className="mt-1 text-sm font-medium text-[#5B6B62]">
@@ -147,7 +147,7 @@ export default function OurSolutions() {
 
                 {/* 4. Bottom Feature Text */}
                 <div>
-                  <h4 className="font-sans text-xl sm:text-2xl font-bold tracking-tight text-[#14231D]">
+                  <h4 className="font-sans text-xl sm:text-2xl font-semibold tracking-tight text-[#14231D]">
                     {card.bottomTitle}
                   </h4>
                   <p className="mt-2 text-sm sm:text-[15px] leading-relaxed text-[#5B6B62]">
